@@ -34,7 +34,7 @@ A modular penetration testing reconnaissance tool designed for automated informa
 1. **Clone or download the repository**
 
 ```bash
-git clone <your-repo-url>
+git clone https://github.com/dhaliaeid/recon-tool.git
 cd recon-tool
 ```
 
@@ -47,9 +47,9 @@ recon-tool/
 ├── README.md
 └── modules/
     ├── __init__.py
-    ├── whois_lookup.py
-    ├── dns_enum.py
-    ├── subdomain_enum.py
+    ├── whois.py
+    ├── dnsEnum.py
+    ├── subdomain.py
     ├── portScan.py
     ├── bannerGrabber.py
     ├── techDetector.py
