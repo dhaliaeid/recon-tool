@@ -6,6 +6,10 @@ Detects web technologies using HTTP headers and response analysis
 import requests
 import re
 import logging
+import urllib3
+
+# Disable SSL warnings
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 logger = logging.getLogger(__name__)
 
