@@ -303,7 +303,7 @@ This project is for educational purposes. Use responsibly.
 
 ## 👥 Authors
 
-- Your Name - Initial work
+- Dalia Ibrahim - Initial work
 
 ## 🙏 Acknowledgments
 
