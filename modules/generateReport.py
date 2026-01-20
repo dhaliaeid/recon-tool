@@ -96,7 +96,7 @@ def generate_report(results, output_file):
 </head>
 <body>
     <div class="header">
-        <h1>🔍 Reconnaissance Report</h1>
+        <h1> Reconnaissance Report</h1>
         <div class="info">
             <strong>Target:</strong> {results['target']}<br>
             <strong>Scan Date:</strong> {results['timestamp']}
@@ -109,7 +109,7 @@ def generate_report(results, output_file):
         whois = results['whois']
         html += """
     <div class="section">
-        <h2>📋 WHOIS Information</h2>
+        <h2> WHOIS Information</h2>
 """
         if whois.get('status') == 'success':
             html += f"""
@@ -137,7 +137,7 @@ def generate_report(results, output_file):
         dns = results['dns']
         html += """
     <div class="section">
-        <h2>🌐 DNS Records</h2>
+        <h2>DNS Records</h2>
 """
         for record_type in ['A', 'AAAA', 'MX', 'NS', 'TXT', 'SOA']:
             records = dns.get(record_type, [])
@@ -157,7 +157,7 @@ def generate_report(results, output_file):
         subs = results['subdomains']
         html += f"""
     <div class="section">
-        <h2>🔎 Subdomains ({subs.get('count', 0)} found)</h2>
+        <h2>Subdomains ({subs.get('count', 0)} found)</h2>
 """
         if subs.get('subdomains'):
             for subdomain in subs['subdomains'][:50]:  # Limit display
@@ -174,7 +174,7 @@ def generate_report(results, output_file):
         ports = results['ports']
         html += f"""
     <div class="section">
-        <h2>🔓 Open Ports ({len(ports.get('open_ports', []))}/{ports.get('closed_count', 0) + len(ports.get('open_ports', []))} scanned)</h2>
+        <h2>Open Ports ({len(ports.get('open_ports', []))}/{ports.get('closed_count', 0) + len(ports.get('open_ports', []))} scanned)</h2>
 """
         if ports.get('ip'):
             html += f"        <p><strong>IP Address:</strong> {ports['ip']}</p>\n"
@@ -195,7 +195,7 @@ def generate_report(results, output_file):
         if banners.get('banners'):
             html += """
     <div class="section">
-        <h2>🏷️ Service Banners</h2>
+        <h2>Service Banners</h2>
 """
             for port, banner in banners['banners'].items():
                 html += f"""
@@ -209,7 +209,7 @@ def generate_report(results, output_file):
         tech = results['technologies']
         html += """
     <div class="section">
-        <h2>⚙️ Detected Technologies</h2>
+        <h2>Detected Technologies</h2>
 """
         if tech.get('server'):
             html += f"        <p><strong>Server:</strong> {tech['server']}</p>\n"
