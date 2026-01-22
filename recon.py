@@ -107,7 +107,7 @@ Examples:
     ╚═╝  ╚═╝╚══════╝ ╚═════╝ ╚═════╝ ╚═╝  ╚═══╝        ╚═╝    ╚═════╝  ╚═════╝ ╚══════╝
     Recon-Tool | Modular Reconnaissance Framework
     Author: Dalia Ibrahim
-    Purpose: Pentesting & Bug Bounty Recon
+    Purpose: Red team reconnaissance
     """
     print(banner)
     print(f"    {'─'*58}\n")
