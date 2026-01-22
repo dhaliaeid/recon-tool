@@ -211,8 +211,8 @@ In such cases, the tool continues without crashing and reports the failure.
 ## Purpose
 
 This tool is designed for:
-Red team bounty reconnaissance
-Penetration testing reconnaissance
-Bug bounty reconnaissance
-Security learning and tooling practice
-It follows a real-world recon methodology and emphasizes robustness, clarity, and reporting quality
+Red team bounty reconnaissance.
+Penetration testing reconnaissance.
+Bug bounty reconnaissance.
+Security learning and tooling practice.
+It follows a real-world recon methodology and emphasizes robustness, clarity, and reporting quality.
