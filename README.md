@@ -181,7 +181,7 @@ python recon.py --target example.com --all -vv
 ├── requirements.txt # Python dependencies
 ├── README.md # Documentation
 └── modules/
-  ├── **init**.py # Package initializer
+  ├── __init__.py # Package initializer
   ├── whois.py # WHOIS lookup
   ├── dnsEnum.py # DNS enumeration
   ├── subdomain.py # Basic subdomain discovery
@@ -189,7 +189,7 @@ python recon.py --target example.com --all -vv
   ├── portScan.py # Port scanning
   ├── bannerGrabber.py # Banner grabbing
   ├── techDetector.py # Technology detection
-  ├── screenshots.py # Screenshot module (Playwright)
+  ├── screenshots.py # Screenshot module
   └── generateReport.py # HTML report generator
 ```
 
