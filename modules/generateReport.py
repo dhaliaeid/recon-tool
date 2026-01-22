@@ -184,7 +184,7 @@ def generate_report(results, output_file):
         <h2>Advanced Subdomains ({adsubs.get('count', 0)} found)</h2>
 """
 
-        # Sources breakdown (optional لكن مهم جدًا)
+        # Sources breakdown
         if adsubs.get('sources'):
             html += """
         <h3>Sources</h3>
@@ -262,23 +262,25 @@ def generate_report(results, output_file):
             html += "        </div>\n"
 
         html += "    </div>\n"
+
    # Screenshot Section   
-    if results.get('screenshot'):
-        screenshot_path = results['screenshot'].replace('\\', '/')
-        html += f"""
-    <div class="section">
-        <h2>Screenshot</h2>
-        <p><strong>Saved at:</strong> {screenshot_path}</p>
-        <img class="screenshot" src="{screenshot_path}" alt="Target Screenshot">
-    </div>
-"""
-    else:
-        html += """
-    <div class="section">
-        <h2>Screenshot</h2>
-        <p>No screenshot captured.</p>
-    </div>
-"""
+   # if results.get('screenshot'):
+   #     screenshot_path = results['screenshot'].replace('\\', '/')
+   #     html += f"""
+   # <div class="section">
+   #     <h2>Screenshot</h2>
+   #     <p><strong>Saved at:</strong> {screenshot_path}</p>
+   #     <img class="screenshot" src="{screenshot_path}" alt="Target Screenshot">
+   # </div>
+#"""
+#    else:
+#        html += """
+#    <div class="section">
+#        <h2>Screenshot</h2>
+#        <p>No screenshot captured.</p>
+#    </div>
+#"""
+
 
     html += """
 </body>
