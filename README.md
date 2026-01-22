@@ -1,4 +1,4 @@
-# 🔍 Custom Reconnaissance Tool
+# Custom Reconnaissance Tool
 
 A modular penetration testing reconnaissance tool designed for automated information gathering during security assessments and bug bounty engagements.
 
@@ -11,7 +11,7 @@ The tool follows a real-world reconnaissance methodology and focuses on:
 
 ---
 
-## ✨ Features
+## Features
 
 ### Passive Reconnaissance
 
@@ -27,7 +27,7 @@ The tool follows a real-world reconnaissance methodology and focuses on:
     - HackerTarget
     - AlienVault OTX (may be rate-limited)
     - URLScan.io
-  - ⚠️ Some sources may be unavailable or rate-limited (e.g. OTX 429, ThreatCrowd SSL issues)
+  - Some sources may be unavailable or rate-limited (e.g. OTX 429, ThreatCrowd SSL issues)
 
 ---
 
@@ -58,12 +58,11 @@ The tool follows a real-world reconnaissance methodology and focuses on:
 
 ---
 
-## 🛠 Installation
+## Installation
 
 ### Prerequisites
 
 - Python **3.7+**
-- pip (Python package manager)
 
 ---
 
@@ -71,104 +70,124 @@ The tool follows a real-world reconnaissance methodology and focuses on:
 
 1. **Clone the repository**
 
-````bash
+```
 git clone https://github.com/dhaliaeid/recon-tool.git
 cd recon-tool
+```
 
 2. **Create and activate a virtual environment**
 
-```bash
+```
 python3 -m venv venv
 source venv/bin/activate
+```
 
 3. **Install Python dependencies**
 
-```bash
+```
 pip install -r requirements.txt
+```
 
 ### Usage
+
 #### Basic Commands
+
 ##### Run all reconnaissance modules
 
-```bash
+```
 python recon.py --target example.com --all
+```
 
 ##### Passive reconnaissance only
-```bash
+
+```
 python recon.py --target example.com --passive
+```
 
 #### Run Specific Modules
 
-```bash
+```
 # WHOIS lookup
 python recon.py --target example.com --whois
-```bash
+
 # DNS enumeration
 python recon.py --target example.com --dns
-```bash
+
 # Basic subdomain discovery
 python recon.py --target example.com --subdomains
-```bash
+
 # Advanced subdomain discovery
 python recon.py --target example.com --subdomains-advanced
-```bash
+
 # Port scanning
 python recon.py --target example.com --port-scan
-```bash
+
 # Banner grabbing (requires port scan)
 python recon.py --target example.com --port-scan --banner
-```bash
+
 # Technology detection
 python recon.py --target example.com --tech
-```bash
+
 # Screenshot capture
 python recon.py --target example.com --screenshot
+```
 
 #### Combine Multiple Modules
 
-```bash
+```
 python recon.py --target example.com --dns --subdomains --tech
+```
 
 #### Advanced Options
+
 Custom Port Range
-```bash
+
+```
 python recon.py --target example.com --port-scan --ports 1-65535
+```
 
 Scan Specific Ports
-```bash
+
+```
 python recon.py --target example.com --port-scan --ports 80,443,8080,8443
+```
 
 Custom Output File
-```bash
+
+```
 python recon.py --target example.com --all -o report_name
+```
 
 #### Verbosity Levels
-```bash
+
+```
 # Default output
 python recon.py --target example.com --all
-```bash
+
 # Info level logging
 python recon.py --target example.com --all -v
-```bash
+
 # Debug level logging
 python recon.py --target example.com --all -vv
+```
 
 ## Project Structure
+
 recon-tool/
-├── recon.py                 # Main entry point
-├── requirements.txt         # Python dependencies
-├── README.md                # Documentation
+├── recon.py # Main entry point
+├── requirements.txt # Python dependencies
+├── README.md # Documentation
 └── modules/
-    ├── __init__.py          # Package initializer
-    ├── whois.py             # WHOIS lookup
-    ├── dnsEnum.py           # DNS enumeration
-    ├── subdomain.py         # Basic subdomain discovery
-    ├── subdomains_advanced.py  # Advanced subdomain discovery
-    ├── portScan.py          # Port scanning
-    ├── bannerGrabber.py     # Banner grabbing
-    ├── techDetector.py      # Technology detection
-    ├── screenshots.py       # Screenshot module (Playwright)
-    └── generateReport.py    # HTML report generator
+├── **init**.py # Package initializer
+├── whois.py # WHOIS lookup
+├── dnsEnum.py # DNS enumeration
+├── subdomain.py # Basic subdomain discovery
+├── subdomains_advanced.py # Advanced subdomain discovery
+├── portScan.py # Port scanning
+├── bannerGrabber.py # Banner grabbing
+├── techDetector.py # Technology detection
+├── screenshots.py # Screenshot module (Playwright)
+└── generateReport.py # HTML report generator
 
 ## Notes & Limitations
 
@@ -188,9 +207,8 @@ In such cases, the tool continues without crashing and reports the failure.
 ## Purpose
 
 This tool is designed for:
-Read team  bounty reconnaissance
+Read team bounty reconnaissance
 Penetration testing reconnaissance
 Bug bounty reconnaissance
 Security learning and tooling practice
 It follows a real-world recon methodology and emphasizes robustness, clarity, and reporting quality
-````
