@@ -211,7 +211,7 @@ In such cases, the tool continues without crashing and reports the failure.
 ## Purpose
 
 This tool is designed for:
-Read team bounty reconnaissance
+Red team bounty reconnaissance
 Penetration testing reconnaissance
 Bug bounty reconnaissance
 Security learning and tooling practice
