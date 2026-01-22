@@ -96,6 +96,7 @@ pip install -r requirements.txt
 
 ```
 python recon.py --target example.com --all
+python recon.py -t example.com --all
 ```
 
 ##### Passive reconnaissance only
@@ -156,6 +157,8 @@ Custom Output File
 
 ```
 python recon.py --target example.com --all -o report_name
+
+python recon.py --target example.com --all --output report_name
 ```
 
 #### Verbosity Levels
