@@ -176,21 +176,22 @@ python recon.py --target example.com --all -vv
 
 ## Project Structure
 
-recon-tool/
+```recon-tool/
 ├── recon.py # Main entry point
 ├── requirements.txt # Python dependencies
 ├── README.md # Documentation
 └── modules/
-├── **init**.py # Package initializer
-├── whois.py # WHOIS lookup
-├── dnsEnum.py # DNS enumeration
-├── subdomain.py # Basic subdomain discovery
-├── subdomains_advanced.py # Advanced subdomain discovery
-├── portScan.py # Port scanning
-├── bannerGrabber.py # Banner grabbing
-├── techDetector.py # Technology detection
-├── screenshots.py # Screenshot module (Playwright)
-└── generateReport.py # HTML report generator
+  ├── **init**.py # Package initializer
+  ├── whois.py # WHOIS lookup
+  ├── dnsEnum.py # DNS enumeration
+  ├── subdomain.py # Basic subdomain discovery
+  ├── subdomains_advanced.py # Advanced subdomain discovery
+  ├── portScan.py # Port scanning
+  ├── bannerGrabber.py # Banner grabbing
+  ├── techDetector.py # Technology detection
+  ├── screenshots.py # Screenshot module (Playwright)
+  └── generateReport.py # HTML report generator
+```
 
 ## Notes & Limitations
 
