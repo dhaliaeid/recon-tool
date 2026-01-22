@@ -7,10 +7,11 @@ import logging
 
 logger = logging.getLogger(__name__)
 
+
 def generate_report(results, output_file):
     """
     Generate HTML report from reconnaissance results
-    
+
     Args:
         results (dict): All reconnaissance results
         output_file (str): Output file path
@@ -83,6 +84,7 @@ def generate_report(results, output_file):
             overflow-x: auto;
             font-family: 'Courier New', monospace;
             font-size: 0.9em;
+            white-space: pre-wrap;
         }}
         .subdomain {{
             background: #e9ecef;
@@ -92,11 +94,17 @@ def generate_report(results, output_file):
             border-radius: 5px;
             font-size: 0.9em;
         }}
+        .screenshot {{
+            max-width: 100%;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            margin-top: 10px;
+        }}
     </style>
 </head>
 <body>
     <div class="header">
-        <h1> Reconnaissance Report</h1>
+        <h1>Reconnaissance Report</h1>
         <div class="info">
             <strong>Target:</strong> {results['target']}<br>
             <strong>Scan Date:</strong> {results['timestamp']}
@@ -104,12 +112,14 @@ def generate_report(results, output_file):
     </div>
 """
 
+
+ 
     # WHOIS Section
     if results.get('whois'):
         whois = results['whois']
         html += """
     <div class="section">
-        <h2> WHOIS Information</h2>
+        <h2>WHOIS Information</h2>
 """
         if whois.get('status') == 'success':
             html += f"""
@@ -125,11 +135,11 @@ def generate_report(results, output_file):
                 html += f"<tr><td>Expires</td><td>{whois['expires']}</td></tr>"
             if 'referral_server' in whois:
                 html += f"<tr><td>Referral Server</td><td>{whois['referral_server']}</td></tr>"
-            
+
             html += "</table>"
         else:
             html += f"<p>❌ Error: {whois.get('message', 'Unknown error')}</p>"
-        
+
         html += "    </div>\n"
 
     # DNS Section
@@ -144,12 +154,9 @@ def generate_report(results, output_file):
             if records:
                 html += f"        <h3>{record_type} Records</h3>\n        <ul>\n"
                 for record in records:
-                    if isinstance(record, dict):
-                        html += f"            <li>{record}</li>\n"
-                    else:
-                        html += f"            <li>{record}</li>\n"
+                    html += f"            <li>{record}</li>\n"
                 html += "        </ul>\n"
-        
+
         html += "    </div>\n"
 
     # Subdomains Section
@@ -160,13 +167,45 @@ def generate_report(results, output_file):
         <h2>Subdomains ({subs.get('count', 0)} found)</h2>
 """
         if subs.get('subdomains'):
-            for subdomain in subs['subdomains'][:50]:  # Limit display
-                html += f'        <span class="subdomain">{subdomain}</span>\n'
+            for subd in subs['subdomains'][:50]:
+                html += f'        <span class="subdomain">{subd}</span>\n'
             if len(subs['subdomains']) > 50:
                 html += f"        <p><em>...and {len(subs['subdomains']) - 50} more</em></p>\n"
         else:
             html += "        <p>No subdomains found</p>\n"
-        
+
+        html += "    </div>\n"
+
+    #subdomain advanced section 
+    if results.get('subdomains_advanced'):
+        adsubs = results['subdomains_advanced']
+        html += f"""
+    <div class="section">
+        <h2>Advanced Subdomains ({adsubs.get('count', 0)} found)</h2>
+"""
+
+        # Sources breakdown (optional لكن مهم جدًا)
+        if adsubs.get('sources'):
+            html += """
+        <h3>Sources</h3>
+        <ul>
+"""
+            for source, count in adsubs['sources'].items():
+                html += f"            <li><strong>{source}:</strong> {count}</li>\n"
+            html += "        </ul>\n"
+
+        # Subdomains list
+        if adsubs.get('subdomains'):
+            for sd in adsubs['subdomains'][:50]:
+                html += f'        <span class="subdomain">{sd}</span>\n'
+
+            if len(adsubs['subdomains']) > 50:
+                html += f"""
+        <p><em>...and {len(adsubs['subdomains']) - 50} more</em></p>
+"""
+        else:
+            html += "        <p>No advanced subdomains found.</p>\n"
+
         html += "    </div>\n"
 
     # Port Scan Section
@@ -174,11 +213,11 @@ def generate_report(results, output_file):
         ports = results['ports']
         html += f"""
     <div class="section">
-        <h2>Open Ports ({len(ports.get('open_ports', []))}/{ports.get('closed_count', 0) + len(ports.get('open_ports', []))} scanned)</h2>
+        <h2>Open Ports ({len(ports.get('open_ports', []))} found)</h2>
 """
         if ports.get('ip'):
             html += f"        <p><strong>IP Address:</strong> {ports['ip']}</p>\n"
-        
+
         if ports.get('open_ports'):
             html += "        <table>\n            <tr><th>Port</th><th>State</th></tr>\n"
             for port in ports['open_ports']:
@@ -186,7 +225,7 @@ def generate_report(results, output_file):
             html += "        </table>\n"
         else:
             html += "        <p>No open ports found</p>\n"
-        
+
         html += "    </div>\n"
 
     # Banners Section
@@ -215,14 +254,31 @@ def generate_report(results, output_file):
             html += f"        <p><strong>Server:</strong> {tech['server']}</p>\n"
         if tech.get('cms'):
             html += f"        <p><strong>CMS:</strong> {tech['cms']}</p>\n"
-        
+
         if tech.get('technologies'):
             html += "        <p><strong>Technologies:</strong></p>\n        <div>\n"
             for t in tech['technologies']:
                 html += f'            <span class="badge">{t}</span>\n'
             html += "        </div>\n"
-        
+
         html += "    </div>\n"
+   # Screenshot Section   
+    if results.get('screenshot'):
+        screenshot_path = results['screenshot'].replace('\\', '/')
+        html += f"""
+    <div class="section">
+        <h2>Screenshot</h2>
+        <p><strong>Saved at:</strong> {screenshot_path}</p>
+        <img class="screenshot" src="{screenshot_path}" alt="Target Screenshot">
+    </div>
+"""
+    else:
+        html += """
+    <div class="section">
+        <h2>Screenshot</h2>
+        <p>No screenshot captured.</p>
+    </div>
+"""
 
     html += """
 </body>
