@@ -7,6 +7,7 @@ import requests
 import json
 import logging
 import time
+import ssl
 
 logger = logging.getLogger(__name__)
 
@@ -117,7 +118,7 @@ def query_threatcrowd(domain):
         logger.debug(f"Querying ThreatCrowd for {domain}")
         print(f"    [*] Querying ThreatCrowd...")
         
-        url = f"https://www.threatcrowd.org/searchApi/v2/domain/report/?domain={domain}"
+        url = f"https://threatcrowd.org/searchApi/v2/domain/report/?domain={domain}"
         response = requests.get(url, timeout=20)
         
         if response.status_code == 200:
@@ -140,6 +141,9 @@ def query_threatcrowd(domain):
     
     except requests.Timeout:
         logger.error("Request to ThreatCrowd timed out")
+    except requests.exceptions.SSLError as e:
+        logger.warning(f"ThreatCrowd SSL error, skipping source: {e}")
+        return set()
     except Exception as e:
         logger.error(f"ThreatCrowd query failed: {e}")
     
@@ -164,6 +168,9 @@ def query_alienvault(domain):
         
         url = f"https://otx.alienvault.com/api/v1/indicators/domain/{domain}/passive_dns"
         response = requests.get(url, timeout=20)
+        if response.status_code == 429:
+            logger.warning("AlienVault rate limited (429). Skipping source.")
+            return set()
         
         if response.status_code == 200:
             try:

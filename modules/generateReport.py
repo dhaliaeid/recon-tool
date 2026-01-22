@@ -167,14 +167,13 @@ def generate_report(results, output_file):
         <h2>Subdomains ({subs.get('count', 0)} found)</h2>
 """
         if subs.get('subdomains'):
-            for subd in subs['subdomains'][:50]:
+            for subd in subs['subdomains']:  # ✅ بدون [:50]
                 html += f'        <span class="subdomain">{subd}</span>\n'
-            if len(subs['subdomains']) > 50:
-                html += f"        <p><em>...and {len(subs['subdomains']) - 50} more</em></p>\n"
         else:
             html += "        <p>No subdomains found</p>\n"
 
         html += "    </div>\n"
+
 
     #subdomain advanced section 
     if results.get('subdomains_advanced'):
@@ -183,8 +182,6 @@ def generate_report(results, output_file):
     <div class="section">
         <h2>Advanced Subdomains ({adsubs.get('count', 0)} found)</h2>
 """
-
-        # Sources breakdown
         if adsubs.get('sources'):
             html += """
         <h3>Sources</h3>
@@ -193,6 +190,14 @@ def generate_report(results, output_file):
             for source, count in adsubs['sources'].items():
                 html += f"            <li><strong>{source}:</strong> {count}</li>\n"
             html += "        </ul>\n"
+
+        if adsubs.get('subdomains'):
+            for sd in adsubs['subdomains']:  # ✅ بدون [:50]
+                html += f'        <span class="subdomain">{sd}</span>\n'
+        else:
+            html += "        <p>No advanced subdomains found.</p>\n"
+
+        html += "    </div>\n"
 
         # Subdomains list
         if adsubs.get('subdomains'):
@@ -264,23 +269,22 @@ def generate_report(results, output_file):
         html += "    </div>\n"
 
    # Screenshot Section   
-   # if results.get('screenshot'):
-   #     screenshot_path = results['screenshot'].replace('\\', '/')
-   #     html += f"""
-   # <div class="section">
-   #     <h2>Screenshot</h2>
-   #     <p><strong>Saved at:</strong> {screenshot_path}</p>
-   #     <img class="screenshot" src="{screenshot_path}" alt="Target Screenshot">
-   # </div>
-#"""
-#    else:
-#        html += """
-#    <div class="section">
-#        <h2>Screenshot</h2>
-#        <p>No screenshot captured.</p>
-#    </div>
-#"""
-
+    if results.get('screenshot'):
+        screenshot_path = results['screenshot'].replace('\\', '/')
+        html += f"""
+    <div class="section">
+        <h2>Screenshot</h2>
+        <p><strong>Saved at:</strong> {screenshot_path}</p>
+        <img class="screenshot" src="{screenshot_path}" alt="Target Screenshot">
+    </div>
+"""
+    else:
+        html += """
+    <div class="section">
+        <h2>Screenshot</h2>
+        <p>No screenshot captured.</p>
+    </div>
+"""
 
     html += """
 </body>
