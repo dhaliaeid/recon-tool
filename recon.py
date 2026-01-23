@@ -106,7 +106,6 @@ Examples:
     ██║  ██║███████╗╚██████╗╚██████╔╝██║ ╚████║        ██║   ╚██████╔╝╚██████╔╝███████╗
     ╚═╝  ╚═╝╚══════╝ ╚═════╝ ╚═════╝ ╚═╝  ╚═══╝        ╚═╝    ╚═════╝  ╚═════╝ ╚══════╝
     Recon-Tool | Modular Reconnaissance Framework
-    Author: Dalia Ibrahim
     Purpose: Red team reconnaissance
     """
     print(banner)
