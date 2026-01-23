@@ -159,6 +159,8 @@ Custom Output File
 python recon.py --target example.com --all -o report_name
 
 python recon.py --target example.com --all --output report_name
+
+python recon.py --target example.com --all --no-report    #Skip report generation (only display in CLI)
 ```
 
 #### Verbosity Levels
